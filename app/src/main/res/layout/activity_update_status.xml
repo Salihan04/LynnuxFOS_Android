@@ -1,0 +1,103 @@
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Incident Name"
+        android:id="@+id/incidentName_US"
+        android:layout_marginTop="74dp"
+        android:layout_toStartOf="@+id/incidentNameText_US"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/incidentNameText_US"
+        android:layout_marginRight="37dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/incidentNameText_US"
+        android:hint="Incident Name"
+        android:layout_marginRight="69dp"
+        android:layout_alignBottom="@+id/incidentName_US"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:id="@+id/description_US"
+        android:layout_below="@+id/incidentNameText_US"
+        android:layout_alignRight="@+id/incidentName_US"
+        android:layout_alignEnd="@+id/incidentName_US"
+        android:layout_marginTop="37dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/descriptionText_US"
+        android:hint="Description"
+        android:layout_alignBottom="@+id/description_US"
+        android:layout_alignLeft="@+id/incidentNameText_US"
+        android:layout_alignStart="@+id/incidentNameText_US" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Priority"
+        android:id="@+id/priority_US"
+        android:layout_marginTop="33dp"
+        android:layout_below="@+id/descriptionText_US"
+        android:layout_alignRight="@+id/description_US"
+        android:layout_alignEnd="@+id/description_US" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/priorityText_US"
+        android:hint="Priority Level"
+        android:layout_alignBottom="@+id/priority_US"
+        android:layout_toRightOf="@+id/incidentName_US"
+        android:layout_toEndOf="@+id/incidentName_US" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:id="@+id/update_US"
+        android:layout_marginTop="33dp"
+        android:layout_below="@+id/priorityText_US"
+        android:layout_alignRight="@+id/priority_US"
+        android:layout_alignEnd="@+id/priority_US" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/updateText_US"
+        android:hint="Update Text"
+        android:layout_alignBottom="@+id/update_US"
+        android:layout_toRightOf="@+id/incidentName_US"
+        android:layout_toEndOf="@+id/incidentName_US" />
+
+    <ImageView
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:id="@+id/updateImageBtn"
+        android:layout_below="@+id/update_US"
+        android:layout_alignLeft="@+id/update_US"
+        android:layout_alignStart="@+id/update_US"
+        android:layout_marginTop="36dp"
+        android:src="@drawable/systemreport32"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:id="@+id/submitUpdateBtn"
+        android:layout_below="@+id/updateImageBtn"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

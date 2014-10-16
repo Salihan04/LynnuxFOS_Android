@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">LynnuxFOS</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_home">home</string>
+    <string name="title_activity_report_incident">reportIncident</string>
+    <string name="title_activity_request_resources">requestResources</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_update_status">updateStatus</string>
+    <string name="title_activity_config_feed">configFeed</string>
+    <string name="title_activity_linked_incidents">linkedIncidents</string>
+    <string name="title_activity_view_event">viewEvent</string>
+    <string name="title_activity_view_incident">viewIncident</string>
+
+</resources>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lynnux.lynnuxfos" >
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />>
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".login"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".home"
+            android:label="@string/title_activity_home" >
+        </activity>
+        <activity
+            android:name=".reportIncident"
+            android:label="@string/title_activity_report_incident" >
+        </activity>
+        <activity
+            android:name=".requestResources"
+            android:label="@string/title_activity_request_resources" >
+        </activity>
+        <activity
+            android:name=".updateStatus"
+            android:label="@string/title_activity_update_status" >
+        </activity>
+        <activity
+            android:name=".configFeed"
+            android:label="@string/title_activity_config_feed" >
+        </activity>
+        <activity
+            android:name=".linkedIncidents"
+            android:label="@string/title_activity_linked_incidents" >
+        </activity>
+        <activity
+            android:name=".viewEvent"
+            android:label="@string/title_activity_view_event" >
+        </activity>
+        <activity
+            android:name=".viewIncident"
+            android:label="@string/title_activity_view_incident" >
+        </activity>
+    </application>
+
+</manifest>
