@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 
 public class login extends Activity {
@@ -19,7 +20,7 @@ public class login extends Activity {
 
         intent = new Intent(this,home.class);
 
-        Button loginBtn = (Button) findViewById(R.id.loginBtn);
+        ImageButton loginBtn = (ImageButton) findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

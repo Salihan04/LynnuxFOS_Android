@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import java.io.File;
@@ -24,10 +26,12 @@ import java.io.IOException;
 public class requestResources extends Activity {
     private static final String COUNT = "count";
     int count,TAKE_PHOTO_CODE = 0;
-    Intent goBackMainIntent;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor spEdit;
     ImageView requestResourcesBtn;
+    EditText incidentNameText,descriptionText,priorityText,messageText;
+    String incidentName,description,priority,message;
+    Bitmap photo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +42,19 @@ public class requestResources extends Activity {
         spEdit = sharedPreferences.edit();
         count = sharedPreferences.getInt(COUNT,0);
 
-        goBackMainIntent = new Intent(this,home.class);
-        Button submitRequestBtn = (Button) findViewById(R.id.submitRequestBtn);
+        incidentNameText = (EditText) findViewById(R.id.incidentNameText_RR);
+        descriptionText = (EditText) findViewById(R.id.descriptionText_RR);
+        priorityText = (EditText) findViewById(R.id.priorityText_RR);
+        messageText = (EditText) findViewById(R.id.messageText_RR);
+        ImageButton submitRequestBtn = (ImageButton) findViewById(R.id.submitRequestBtn);
         submitRequestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(goBackMainIntent);
+                incidentName = (incidentNameText.getText()).toString();
+                description = (descriptionText.getText()).toString();
+                priority = (priorityText.getText()).toString();
+                message = (messageText.getText()).toString();
+                requestResources.this.finish();
             }
         });
 
@@ -62,8 +73,8 @@ public class requestResources extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == TAKE_PHOTO_CODE && resultCode == RESULT_OK) {
-            Bitmap myBitmap =(Bitmap) data.getExtras().get("data");
-            requestResourcesBtn.setImageBitmap(myBitmap);
+            photo =(Bitmap) data.getExtras().get("data");
+            requestResourcesBtn.setImageBitmap(photo);
         }
     }
 

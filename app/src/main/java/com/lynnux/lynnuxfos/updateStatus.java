@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import java.io.File;
@@ -28,6 +30,9 @@ public class updateStatus extends Activity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor spEdit;
     ImageView updateImageBtn;
+    EditText incidentNameText,descriptionText,priorityText,updateText;
+    String incidentName,description,priority,update;
+    Bitmap photo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +43,19 @@ public class updateStatus extends Activity {
         spEdit = sharedPreferences.edit();
         count = sharedPreferences.getInt(COUNT,0);
 
-        goBackMainIntent = new Intent(this,home.class);
-        Button submitUpdateBtn = (Button) findViewById(R.id.submitUpdateBtn);
+        incidentNameText = (EditText) findViewById(R.id.incidentNameText_US);
+        descriptionText = (EditText) findViewById(R.id.descriptionText_US);
+        priorityText = (EditText) findViewById(R.id.priorityText_US);
+        updateText = (EditText) findViewById(R.id.updateText_US);
+        ImageButton submitUpdateBtn = (ImageButton) findViewById(R.id.submitUpdateBtn);
         submitUpdateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(goBackMainIntent);
+                incidentName = (incidentNameText.getText()).toString();
+                description = (descriptionText.getText()).toString();
+                priority = (priorityText.getText()).toString();
+                update = (updateText.getText()).toString();
+                updateStatus.this.finish();
             }
         });
 
@@ -62,8 +74,8 @@ public class updateStatus extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == TAKE_PHOTO_CODE && resultCode == RESULT_OK) {
-            Bitmap myBitmap =(Bitmap) data.getExtras().get("data");
-            updateImageBtn.setImageBitmap(myBitmap);
+            photo =(Bitmap) data.getExtras().get("data");
+            updateImageBtn.setImageBitmap(photo);
         }
     }
 

@@ -1,83 +1,101 @@
-<RelativeLayout
+<LinearLayout
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@color/fire_brick_red"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Incident Name"
-        android:id="@+id/incidentName"
-        android:layout_marginTop="74dp"
-        android:layout_toStartOf="@+id/incidentNameText"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/incidentNameText"
-        android:layout_marginRight="37dp" />
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Incident Name"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:id="@+id/incidentName"
+            />
 
-    <EditText
-        android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/incidentNameText"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:hint="Incident Name"
+             />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/incidentNameText"
-        android:hint="Incident Name"
-        android:layout_marginRight="69dp"
-        android:layout_alignBottom="@+id/incidentName"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:id="@+id/description"
+            />
 
-    <TextView
-        android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/descriptionText"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:hint="Description"
+             />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Description"
-        android:id="@+id/description"
-        android:layout_below="@+id/incidentNameText"
-        android:layout_alignRight="@+id/incidentName"
-        android:layout_alignEnd="@+id/incidentName"
-        android:layout_marginTop="37dp" />
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Priority"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:id="@+id/priority"
+            />
 
-    <EditText
-        android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/priorityText"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:hint="Priority Level"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/descriptionText"
-        android:hint="Description"
-        android:layout_alignBottom="@+id/description"
-        android:layout_alignLeft="@+id/incidentNameText"
-        android:layout_alignStart="@+id/incidentNameText" />
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/incidentImageBtn"
+            android:layout_gravity="center"
+            android:src="@drawable/upload_image_button"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/submit"
+            android:id="@+id/submitBtn"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@color/fire_brick_red"/>
+    </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Priority"
-        android:id="@+id/priority"
-        android:layout_marginTop="33dp"
-        android:layout_below="@+id/descriptionText"
-        android:layout_alignRight="@+id/description"
-        android:layout_alignEnd="@+id/description" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/priorityText"
-        android:hint="Priority Level"
-        android:layout_alignBottom="@+id/priority"
-        android:layout_toRightOf="@+id/incidentName"
-        android:layout_toEndOf="@+id/incidentName" />
-
-    <ImageView
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:id="@+id/incidentImageBtn"
-        android:layout_below="@+id/priority"
-        android:layout_alignLeft="@+id/priority"
-        android:layout_alignStart="@+id/priority"
-        android:layout_marginTop="36dp"
-        android:src="@drawable/systemreport32"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Submit"
-        android:id="@+id/submitBtn"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/incidentImageBtn"
-        android:layout_centerHorizontal="true" />
-</RelativeLayout>
+</LinearLayout>

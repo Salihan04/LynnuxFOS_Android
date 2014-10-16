@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 
 public class linkedIncidents extends Activity {
@@ -20,6 +21,8 @@ public class linkedIncidents extends Activity {
         viewIncidentIntent = new Intent(this,viewIncident.class);
         ImageButton viewIncidentBtn = (ImageButton) findViewById(R.id.viewIncidentBtn_li);
         ImageButton followEventBtn = (ImageButton) findViewById(R.id.followEventBtn_li);
+        TextView eventTitle = (TextView) findViewById(R.id.incidentTitle);
+        TextView amountOfIncidents = (TextView) findViewById(R.id.amountOfIncidents);
         viewIncidentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

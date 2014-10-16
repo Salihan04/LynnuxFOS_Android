@@ -29,7 +29,7 @@
         />
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:orientation="vertical"
         android:layout_marginTop="30dp">
         <LinearLayout
@@ -53,36 +53,38 @@
                 android:textColor="@color/white"/>
         </LinearLayout>
         <ScrollView
-            android:layout_width="350dp"
-            android:layout_height="250dp">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
             <ListView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </ListView>
         </ScrollView>
-
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:rowCount="1"
+            android:layout_gravity="center">
+            <ImageButton
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/viewIncidentBtn_li"
+                android:src="@drawable/view_incident"
+                android:background="@color/fire_brick_red"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"/>
+            <ImageButton
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/followEventBtn_li"
+                android:src="@drawable/follow_event"
+                android:background="@color/fire_brick_red"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"/>
+        </GridLayout>
     </LinearLayout>
-    <GridLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:columnCount="2"
-        android:rowCount="1"
-        android:layout_gravity="center">
-        <ImageButton
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:id="@+id/viewIncidentBtn_li"
-            android:src="@drawable/view_incident"
-            android:background="@color/fire_brick_red"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"/>
-        <ImageButton
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:id="@+id/followEventBtn_li"
-            android:src="@drawable/follow_event"
-            android:background="@color/fire_brick_red"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"/>
-    </GridLayout>
+
+
 </LinearLayout>

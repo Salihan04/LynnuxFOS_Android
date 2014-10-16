@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -30,10 +31,11 @@ public class reportIncident extends Activity {
 //    File newDir = new File(dir);
     int count,TAKE_PHOTO_CODE = 0;
     ImageView incidentImage;
-    Intent goBackMainIntent;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor spEdit;
-
+    EditText incidentNameText,descriptionText,priorityText;
+    String incidentName,description,priority;
+    Bitmap photo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +46,17 @@ public class reportIncident extends Activity {
         spEdit = sharedPreferences.edit();
         count = sharedPreferences.getInt(COUNT,0);
 
-        goBackMainIntent = new Intent(this,home.class);
-        Button submitBtn = (Button) findViewById(R.id.submitBtn);
+        incidentNameText = (EditText) findViewById(R.id.incidentNameText);
+        descriptionText = (EditText) findViewById(R.id.descriptionText);
+        priorityText = (EditText) findViewById(R.id.priorityText);
+        ImageButton submitBtn = (ImageButton) findViewById(R.id.submitBtn);
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(goBackMainIntent);
+                incidentName = (incidentNameText.getText()).toString();
+                description = (descriptionText.getText()).toString();
+                priority = (priorityText.getText()).toString();
+                reportIncident.this.finish();
             }
         });
 
@@ -70,8 +77,8 @@ public class reportIncident extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == TAKE_PHOTO_CODE && resultCode == RESULT_OK) {
-            Bitmap myBitmap =(Bitmap) data.getExtras().get("data");
-            incidentImage.setImageBitmap(myBitmap);
+            photo =(Bitmap) data.getExtras().get("data");
+            incidentImage.setImageBitmap(photo);
 //            spEdit.putInt(COUNT,count);
 //            spEdit.commit();
         }
