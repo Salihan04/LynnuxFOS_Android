@@ -6,25 +6,55 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
 
 
 public class login extends Activity {
-    Intent intent;
+    private Intent intent;
+    private String username,password;
+    private EditText usernameText,passwordText;
+    private FOSDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        intent = new Intent(this,home.class);
-
+        //finding all the views
         ImageButton loginBtn = (ImageButton) findViewById(R.id.loginBtn);
+        usernameText = (EditText) findViewById(R.id.username);
+        passwordText = (EditText) findViewById(R.id.password);
+
+        //Submit button
+        intent = new Intent(this,home.class);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(intent);
+                username = usernameText.getText().toString();
+                password = passwordText.getText().toString();
+                if(username.isEmpty()||password.isEmpty()){
+
+                }else{
+                    //try login
+                    dialog = FOSDialog.showProgress(login.this, "Logging in");
+                    ParseUser.logInInBackground(username, password, new LogInCallback() {
+
+                        public void done(ParseUser user, ParseException e) {
+                            dialog.dismiss();
+                            if (user != null) {
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                // Signup failed. Look at the ParseException to see what happened.
+                            }
+                        }
+                    });
+                }
+
             }
         });
     }
