@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -24,16 +25,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.lynnux.lynnuxfos.utility.Utility;
+import com.parse.ParseFile;
 import com.parse.ParseGeoPoint;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 
+import timber.log.Timber;
 
-public class reportIncident extends Activity implements LocationListener{
+
+public class reportIncident extends Activity{
     private static final String COUNT = "count";
 //    private final String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/LynnuxFOS";
 //    File newDir = new File(dir);
@@ -45,10 +51,13 @@ public class reportIncident extends Activity implements LocationListener{
     String incidentName,description,priority;
     Bitmap photo;
 
-    LocationManager locationManager;
-    Location l;
-    String provider;
-    ParseGeoPoint location;
+    FOSDialog dialog;
+
+    private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 1;  //in meters
+    private static final long MINIMUM_TIME_BETWEEN_UPDATES = 1000;  //in milliseconds
+
+    protected LocationManager locationManager;
+    private ParseGeoPoint location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,51 +74,51 @@ public class reportIncident extends Activity implements LocationListener{
 
         //get location service
         locationManager =(LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MINIMUM_TIME_BETWEEN_UPDATES,
+                MINIMUM_DISTANCE_CHANGE_FOR_UPDATES, new MyLocationListener());
 
-        //criteria object will select best service based on
-        //Accuracy, power consumption, response, bearing and monetary cost
-        //set false to use best service otherwise it will select the default Sim network
-        //and give the location based on sim network
-        //now it will first check satellite than Internet than Sim network location
-        provider = locationManager.getBestProvider(criteria, false);
-
-        //now you have best provider
-        //get location
-        l = locationManager.getLastKnownLocation(provider);
-        if(l != null) {
-            //get latitude and longitude of the location
-            double lng = l.getLongitude();
-            double lat = l.getLatitude();
-
-            setLocation(lat, lng);
-        }
-
-        ImageButton submitBtn = (ImageButton) findViewById(R.id.submitBtn);
-        submitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                incidentName = (incidentNameText.getText()).toString();
-                description = (descriptionText.getText()).toString();
-                priority = (priorityText.getText()).toString();
-
-                if(location != null) {
-                    //adding new incident to DB
-                    Utility.reportIncident(description, location, incidentName, Integer.parseInt(priority), "new");
-                }
-
-                reportIncident.this.finish();
-            }
-        });
-
-
-//        newDir.mkdirs();
+        //        newDir.mkdirs();
         incidentImage = (ImageView) findViewById(R.id.incidentImageBtn);
         incidentImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, TAKE_PHOTO_CODE);
+            }
+        });
+
+        //Preparing incident image for uploading to DB
+        BitmapDrawable bitmapDrawable = (BitmapDrawable) incidentImage.getDrawable();
+        Bitmap bitmap = bitmapDrawable.getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] imageInByte = stream.toByteArray();
+//        final Bitmap bmp = BitmapFactory.decodeByteArray(imageInByte, 0, imageInByte.length);
+        final ParseFile pFile = new ParseFile("data.jpg", imageInByte);
+
+        ImageButton submitBtn = (ImageButton) findViewById(R.id.submitBtn);
+        submitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    incidentName = (incidentNameText.getText()).toString();
+                    description = (descriptionText.getText()).toString();
+                    priority = (priorityText.getText()).toString();
+
+                    location = getCurrentLocation();
+                    if (location == null) {
+                        Timber.d("location is null");
+                        location = new ParseGeoPoint(0.0, 0.0);
+                    }
+
+                    Timber.d("Latitude: " + location.getLatitude(), ", Longitude: " + location.getLongitude());
+                    Utility.reportIncident(description, location, incidentName, Integer.parseInt(priority),
+                            "new", pFile, getApplicationContext());
+
+                    reportIncident.this.finish();
+                } catch (Exception e) {
+                    Timber.e("Report incident failed");
+                }
             }
         });
     }
@@ -145,30 +154,47 @@ public class reportIncident extends Activity implements LocationListener{
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
-        double lng = l.getLongitude();
-        double lat = l.getLatitude();
-
-        setLocation(lat, lng);
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-
-    }
-
     public void setLocation(double lat, double lng) {
         this.location = new ParseGeoPoint(lat, lng);
+    }
+
+    protected ParseGeoPoint getCurrentLocation() {
+        Location loc = locationManager.getLastKnownLocation(locationManager.GPS_PROVIDER);
+
+        if(loc == null) {
+            Toast.makeText(getApplicationContext(), "Please turn on GPS", Toast.LENGTH_SHORT).show();
+
+            return null;
+        }
+
+        Timber.d("Latitude: " + loc.getLatitude());
+        Timber.d("Longitude: " + loc.getLongitude());
+
+        return new ParseGeoPoint(loc.getLatitude(), loc.getLongitude());
+    }
+
+    private class MyLocationListener implements LocationListener {
+
+        @Override
+        public void onLocationChanged(Location location) {
+            Timber.d("Latitude: " + location.getLatitude());
+            Timber.d("Longitude: " + location.getLongitude());
+            setLocation(location.getLatitude(), location.getLongitude());
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            Toast.makeText(getApplicationContext(), "Provider status changed", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+            Toast.makeText(getApplicationContext(), "Provider disabled by user. GPS turned off", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+            Toast.makeText(getApplicationContext(), "Provider enabled by user. GPS turned on", Toast.LENGTH_SHORT).show();
+        }
     }
 }
