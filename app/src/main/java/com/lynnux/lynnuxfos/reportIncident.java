@@ -1,11 +1,16 @@
 package com.lynnux.lynnuxfos;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,12 +25,15 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.lynnux.lynnuxfos.utility.Utility;
+import com.parse.ParseGeoPoint;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 
 
-public class reportIncident extends Activity {
+public class reportIncident extends Activity implements LocationListener{
     private static final String COUNT = "count";
 //    private final String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/LynnuxFOS";
 //    File newDir = new File(dir);
@@ -36,6 +44,11 @@ public class reportIncident extends Activity {
     EditText incidentNameText,descriptionText,priorityText;
     String incidentName,description,priority;
     Bitmap photo;
+
+    LocationManager locationManager;
+    Location l;
+    String provider;
+    ParseGeoPoint location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +62,29 @@ public class reportIncident extends Activity {
         incidentNameText = (EditText) findViewById(R.id.incidentNameText);
         descriptionText = (EditText) findViewById(R.id.descriptionText);
         priorityText = (EditText) findViewById(R.id.priorityText);
+
+        //get location service
+        locationManager =(LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+
+        //criteria object will select best service based on
+        //Accuracy, power consumption, response, bearing and monetary cost
+        //set false to use best service otherwise it will select the default Sim network
+        //and give the location based on sim network
+        //now it will first check satellite than Internet than Sim network location
+        provider = locationManager.getBestProvider(criteria, false);
+
+        //now you have best provider
+        //get location
+        l = locationManager.getLastKnownLocation(provider);
+        if(l != null) {
+            //get latitude and longitude of the location
+            double lng = l.getLongitude();
+            double lat = l.getLatitude();
+
+            setLocation(lat, lng);
+        }
+
         ImageButton submitBtn = (ImageButton) findViewById(R.id.submitBtn);
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +92,12 @@ public class reportIncident extends Activity {
                 incidentName = (incidentNameText.getText()).toString();
                 description = (descriptionText.getText()).toString();
                 priority = (priorityText.getText()).toString();
+
+                if(location != null) {
+                    //adding new incident to DB
+                    Utility.reportIncident(description, location, incidentName, Integer.parseInt(priority), "new");
+                }
+
                 reportIncident.this.finish();
             }
         });
@@ -101,5 +143,32 @@ public class reportIncident extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        double lng = l.getLongitude();
+        double lat = l.getLatitude();
+
+        setLocation(lat, lng);
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
+
+    public void setLocation(double lat, double lng) {
+        this.location = new ParseGeoPoint(lat, lng);
     }
 }
