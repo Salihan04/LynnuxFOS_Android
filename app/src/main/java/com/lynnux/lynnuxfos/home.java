@@ -14,17 +14,17 @@ import android.widget.Toast;
 
 
 public class home extends Activity {
-    Intent reportIncidentIntent,viewEventIntent,viewIncidentsIntent;
+    Intent reportIncidentIntent,requestResource,viewIncidentsIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         reportIncidentIntent = new Intent(this,reportIncident.class);
-        viewEventIntent = new Intent(this,viewEvent.class);
+        requestResource = new Intent(this,requestResources.class);
         viewIncidentsIntent = new Intent(this,linkedIncidents.class);
         ImageButton reportIncidentBtn = (ImageButton) findViewById(R.id.reportIncidentBtn);
-        ImageButton viewEventBtn = (ImageButton) findViewById(R.id.viewEventBtn);
+        ImageButton requestResourceBtn = (ImageButton) findViewById(R.id.viewEventBtn);
         ImageButton viewIncidentBtn = (ImageButton) findViewById(R.id.viewIncidentBtn);
         reportIncidentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,10 +32,10 @@ public class home extends Activity {
                 startActivity(reportIncidentIntent);
             }
         });
-        viewEventBtn.setOnClickListener(new View.OnClickListener() {
+        requestResourceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(viewEventIntent);
+                startActivity(requestResource);
             }
         });
         viewIncidentBtn.setOnClickListener(new View.OnClickListener() {

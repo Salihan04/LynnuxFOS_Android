@@ -15,6 +15,6 @@ public class LynnuxFOS_Application extends Application {
     public void onCreate() {
         super.onCreate();
         ParseObject.registerSubclass(ParseUser.class);
-        Parse.initialize(this, "cztzxFVJLJ3PCoSGJeyWU9PX0S8nsNlXtIIwIV98", "VZnqAvCGLZiBaDcrSPFLAY8jgQhP5dwUJdAfRbAx");
+        Parse.initialize(this, "qjArPWWC0eD8yFmAwRjKkiCQ82Dtgq5ovIbD5ZKW", "Ax0rYmuqAi0NyTNdqeLwJE63IZwvCri69kHtBe2I");
     }
 }
