@@ -24,7 +24,7 @@ public class home extends Activity {
         requestResource = new Intent(this,requestResources.class);
         viewIncidentsIntent = new Intent(this,linkedIncidents.class);
         ImageButton reportIncidentBtn = (ImageButton) findViewById(R.id.reportIncidentBtn);
-        ImageButton requestResourceBtn = (ImageButton) findViewById(R.id.viewEventBtn);
+        ImageButton requestResourceBtn = (ImageButton) findViewById(R.id.requestResourceBtn);
         ImageButton viewIncidentBtn = (ImageButton) findViewById(R.id.viewIncidentBtn);
         reportIncidentBtn.setOnClickListener(new View.OnClickListener() {
             @Override

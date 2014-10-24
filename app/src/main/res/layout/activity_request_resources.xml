@@ -13,70 +13,27 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="120dp"
+            android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:text="Incident Name"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:id="@+id/incidentName_RR"/>
-
-        <EditText
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:hint="Incident Name"
-            android:id="@+id/incidentNameText_RR"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="Description"
-            android:id="@+id/description_RR"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
-
-        <EditText
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:id="@+id/descriptionText_RR"
-            android:hint="Description"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="Priority"
-            android:id="@+id/priority_RR"
+            android:text="Resource Type: "
             android:textColor="@color/white"
             android:textSize="18sp"/>
 
-        <EditText
+        <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:id="@+id/priorityText_RR"
-            android:hint="Priority Level"/>
+            android:text="Spinner here han"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="120dp"
+            android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:text="Message"
-            android:id="@+id/message_RR"
+            android:text="Quantity :"
             android:textColor="@color/white"
             android:textSize="18sp" />
 
@@ -85,22 +42,50 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:id="@+id/messageText_RR"
-            android:hint="Message"/>
+            android:id="@+id/quantity"
+            android:hint="Enter the amount here"
+            android:inputType="number"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:text="Incident :"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:text="Spinner here han"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:text="Region :"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:text="Spinner Here"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:id="@+id/requestResourcesBtn_RR"
-            android:layout_gravity="center"
-            android:src="@drawable/upload_image_button"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"/>
-
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

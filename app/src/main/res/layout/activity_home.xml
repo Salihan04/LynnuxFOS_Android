@@ -36,8 +36,8 @@
         <ImageButton
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:id="@+id/viewEventBtn"
-            android:src="@drawable/view_events"
+            android:id="@+id/requestResourceBtn"
+            android:src="@drawable/request_resources"
             android:background="@color/white"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"

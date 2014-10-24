@@ -29,8 +29,8 @@ public class requestResources extends Activity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor spEdit;
     ImageView requestResourcesBtn;
-    EditText incidentNameText,descriptionText,priorityText,messageText;
-    String incidentName,description,priority,message;
+    EditText quantityText;
+    int quantity;
     Bitmap photo;
 
     @Override
@@ -42,29 +42,13 @@ public class requestResources extends Activity {
         spEdit = sharedPreferences.edit();
         count = sharedPreferences.getInt(COUNT,0);
 
-        incidentNameText = (EditText) findViewById(R.id.incidentNameText_RR);
-        descriptionText = (EditText) findViewById(R.id.descriptionText_RR);
-        priorityText = (EditText) findViewById(R.id.priorityText_RR);
-        messageText = (EditText) findViewById(R.id.messageText_RR);
+        quantityText = (EditText) findViewById(R.id.quantity);
         ImageButton submitRequestBtn = (ImageButton) findViewById(R.id.submitRequestBtn);
         submitRequestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                incidentName = (incidentNameText.getText()).toString();
-                description = (descriptionText.getText()).toString();
-                priority = (priorityText.getText()).toString();
-                message = (messageText.getText()).toString();
+                quantity = Integer.valueOf((quantityText.getText()).toString());
                 requestResources.this.finish();
-            }
-        });
-
-
-        requestResourcesBtn = (ImageView) findViewById(R.id.requestResourcesBtn_RR);
-        requestResourcesBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, TAKE_PHOTO_CODE);
             }
         });
     }
