@@ -12,5 +12,13 @@
     <string name="title_activity_linked_incidents">linkedIncidents</string>
     <string name="title_activity_view_event">viewEvent</string>
     <string name="title_activity_view_incident">viewIncident</string>
+    
+    <string-array name="region">
+        <item>North</item>
+        <item>South</item>
+        <item>East</item>
+        <item>West</item>
+        <item>Central</item>
+    </string-array>
 
 </resources>

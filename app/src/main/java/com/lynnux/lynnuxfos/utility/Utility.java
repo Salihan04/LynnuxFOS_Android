@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.lynnux.lynnuxfos.FOSDialog;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseGeoPoint;
@@ -44,12 +45,23 @@ public class Utility {
         });
     }
 
-    public static void requestResource(String resourceId, int quantityRequested, String incidentId) {
-        ParseObject requestResource = new ParseObject("RequestResource");
+    public static void requestResource(ParseObject requestResource, int quantityRequested, String region, final Context context) {
 
-        requestResource.put("resource", resourceId);
+//        requestResource.put("resource", resourceId);
         requestResource.put("quantityRequested", quantityRequested);
-        requestResource.put("incident", incidentId);
-        requestResource.saveInBackground();
+//        requestResource.put("incident", incidentId);
+        requestResource.put("region", region);
+        requestResource.put("requester", ParseUser.getCurrentUser());
+        requestResource.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if(e == null) {
+                    Toast.makeText(context, "Request sent", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(context, "Request not sent", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }
