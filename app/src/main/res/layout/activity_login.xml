@@ -16,6 +16,7 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:hint="Password"
+        android:inputType="textPassword"
         android:textColor="@color/white"/>
 
     <EditText

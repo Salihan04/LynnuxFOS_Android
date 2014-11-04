@@ -38,12 +38,12 @@ public class home extends Activity {
                 startActivity(requestResource);
             }
         });
-        viewIncidentBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(viewIncidentsIntent);
-            }
-        });
+//        viewIncidentBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(viewIncidentsIntent);
+//            }
+//        });
 
     }
 

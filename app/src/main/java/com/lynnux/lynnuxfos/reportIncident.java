@@ -189,12 +189,12 @@ public class reportIncident extends Activity{
 
         @Override
         public void onProviderEnabled(String provider) {
-            Toast.makeText(getApplicationContext(), "Provider disabled by user. GPS turned off", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Provider enabled by user. GPS turned on", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onProviderDisabled(String provider) {
-            Toast.makeText(getApplicationContext(), "Provider enabled by user. GPS turned on", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Provider disabled by user. GPS turned off", Toast.LENGTH_SHORT).show();
         }
     }
 }
