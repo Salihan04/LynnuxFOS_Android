@@ -108,7 +108,8 @@ public class reportIncident extends Activity{
                     location = getCurrentLocation();
                     if (location == null) {
                         Timber.d("location is null");
-                        location = new ParseGeoPoint(0.0, 0.0);
+                        //location hardcoded to NTU by default for the demo
+                        location = new ParseGeoPoint(1.34831, 103.683135);
                     }
 
                     Timber.d("Latitude: " + location.getLatitude(), ", Longitude: " + location.getLongitude());
