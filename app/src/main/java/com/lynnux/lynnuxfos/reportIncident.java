@@ -163,7 +163,7 @@ public class reportIncident extends Activity{
         Location loc = locationManager.getLastKnownLocation(locationManager.GPS_PROVIDER);
 
         if(loc == null) {
-            Toast.makeText(getApplicationContext(), "Please turn on GPS", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(), "Please turn on GPS", Toast.LENGTH_SHORT).show();
 
             return null;
         }

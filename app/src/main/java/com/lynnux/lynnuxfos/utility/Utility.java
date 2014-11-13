@@ -28,7 +28,7 @@ public class Utility {
         incident.put("location", location);     //can create location by using new Parse.GeoPoint(latitude, longitude)
         incident.put("name", name);
         incident.put("priority", priority);
-        incident.put("reporter", ParseUser.getCurrentUser());
+        incident.put("user", ParseUser.getCurrentUser());
         incident.put("status", status);
         incident.put("incidentImage", incidentImage);
         incident.saveInBackground(new SaveCallback() {
