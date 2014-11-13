@@ -108,7 +108,8 @@ public class reportIncident extends Activity{
                     location = getCurrentLocation();
                     if (location == null) {
                         Timber.d("location is null");
-                        location = new ParseGeoPoint(0.0, 0.0);
+                        //location hardcoded to NTU by default for the demo
+                        location = new ParseGeoPoint(1.34831, 103.683135);
                     }
 
                     Timber.d("Latitude: " + location.getLatitude(), ", Longitude: " + location.getLongitude());
@@ -189,12 +190,12 @@ public class reportIncident extends Activity{
 
         @Override
         public void onProviderEnabled(String provider) {
-            Toast.makeText(getApplicationContext(), "Provider disabled by user. GPS turned off", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Provider enabled by user. GPS turned on", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onProviderDisabled(String provider) {
-            Toast.makeText(getApplicationContext(), "Provider enabled by user. GPS turned on", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Provider disabled by user. GPS turned off", Toast.LENGTH_SHORT).show();
         }
     }
 }

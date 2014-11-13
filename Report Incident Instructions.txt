@@ -1,0 +1,3 @@
+1) Make sure GPS on device is on.
+2) Make sure the location pin on device's status bar is not blinking (This means that location is set by GPS)
+3) Report Incident

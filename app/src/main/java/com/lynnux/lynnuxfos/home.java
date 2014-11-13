@@ -12,12 +12,15 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.parse.PushService;
+
 
 public class home extends Activity {
     Intent reportIncidentIntent,requestResource,viewIncidentsIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         reportIncidentIntent = new Intent(this,reportIncident.class);
@@ -38,12 +41,12 @@ public class home extends Activity {
                 startActivity(requestResource);
             }
         });
-        viewIncidentBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(viewIncidentsIntent);
-            }
-        });
+//        viewIncidentBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(viewIncidentsIntent);
+//            }
+//        });
 
     }
 
